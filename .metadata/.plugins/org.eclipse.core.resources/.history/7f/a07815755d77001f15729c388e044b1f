@@ -1,0 +1,61 @@
+package tp1;
+/**
+ * L3 Miage TP1
+ * 
+ * Normalisation des donnée
+ * 
+ * @author mohamed fountir
+ */
+
+public class FeatureScaling {
+    private double  min;  // Valeur minimale des données
+    private double max;  // Valeur maximale des données
+    private double somme;  // Somme des valeurs lues
+    private double nombre;  // Nombre de valeurs lues
+
+    // Constructeur
+    public FeatureScaling() {
+        this.min = Double.MAX_VALUE;
+        this.max = Double.MIN_VALUE;
+        this.somme = 0.0;
+        this.nombre = 0;
+    }
+
+    // Retourne la valeur maximale lue
+    public double getMax() {
+        return this.max;
+    }
+
+    // Retourne la valeur minimale lue
+    public double getMin() {
+        return this.min;
+    }
+
+    // Méthode pour lire une nouvelle valeur
+    public void lire(double valeur) {
+        this.somme += valeur;
+        this.nombre++;
+
+        if (valeur > this.max) 
+            this.max = valeur;
+        if (valeur < this.min) 
+            this.min = valeur;
+    }
+
+    // Calcul de la moyenne des valeurs lues
+    public double moyenne() {
+    	return this.somme / this.nombre;
+        
+    }
+
+    // Méthode pour normaliser une valeur
+    public double normalize(double valeur) {
+    	if (this.min == this.max) {
+    		return 0;
+    	}
+    		
+    	double moyenne = moyenne();
+        return (valeur - moyenne) / this.max - this.min;
+    }
+
+}
